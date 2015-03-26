@@ -27,7 +27,6 @@ import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
@@ -108,8 +107,6 @@ public class WePayApi {
 
 	/** For unit testing. */
 	private DataProvider dataProvider;
-
-	private static final Charset UTF8 = Charset.forName("UTF-8");
 
 	/** For unit testing. */
 	@NoArgsConstructor
@@ -296,7 +293,7 @@ public class WePayApi {
 		if (postJson != null) {
 			conn.setDoOutput(true); // Triggers POST.
 		}
-		conn.setRequestProperty("Content-Type", "application/json; charset=" + UTF8.name());
+		conn.setRequestProperty("Content-Type", "application/json");
 		conn.setRequestProperty("User-Agent", "WePay Java SDK");
 
 		if (token != null) {
@@ -304,7 +301,7 @@ public class WePayApi {
 		}
 
 		if (postJson != null) {
-			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), UTF8);
+			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream(), "UTF-8");
 			writer.write(postJson);
 			writer.close();
 		}
@@ -318,7 +315,7 @@ public class WePayApi {
 	private String urlEncode(Object value)
 	{
 		try {
-			return URLEncoder.encode(value.toString(), UTF8.name());
+			return URLEncoder.encode(value.toString(), "utf-8");
 		} catch (UnsupportedEncodingException e) { throw new RuntimeException(e); }
 	}
 }
