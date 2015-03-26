@@ -92,6 +92,6 @@ public class Checkout extends CheckoutUri {
 		private String zip;
 		private String country;
 		private String region;
-		private String postalcode;
+		private String postcode;
 	}
 }
